@@ -1,3 +1,0 @@
-ImageButton ./components/ImageButton.qml
-TextBox ./components/TextBox.qml
-Menu ./components/Menu.qml

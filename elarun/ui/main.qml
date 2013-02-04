@@ -51,7 +51,7 @@ Rectangle {
     Image {
         id: background
         anchors.fill: parent
-        source: "images/background.png"
+        source: "../images/background.png"
         fillMode: Image.PreserveAspectCrop
     }
 
@@ -69,12 +69,12 @@ Rectangle {
 
         Image {
             anchors.fill: parent
-            source: "images/rectangle.png"
+            source: "../images/rectangle.png"
         }
 
         Image {
             anchors.fill: parent
-            source: "images/rectangle_overlay.png"
+            source: "../images/rectangle_overlay.png"
             opacity: 0.1
         }
 
@@ -112,7 +112,7 @@ Rectangle {
                     Image {
                         id: image1
                         anchors.verticalCenter: parent.verticalCenter
-                        source: "images/user_icon.png"
+                        source: "../images/user_icon.png"
                     }
 
                     TextBox {
@@ -133,7 +133,7 @@ Rectangle {
                     Image {
                         id: image1a
                         anchors.verticalCenter: parent.verticalCenter
-                        source: "images/lock.png"
+                        source: "../images/lock.png"
                     }
 
                     TextBox {
@@ -174,7 +174,7 @@ Rectangle {
 
                 ImageButton {
                     id: session_button
-                    source: "images/session_normal.png"
+                    source: "../images/session_normal.png"
                     onClicked: {
                         menu_session.state = "visible"
                     }
@@ -199,7 +199,7 @@ Rectangle {
 
                 ImageButton {
                     id: system_button
-                    source: "images/system_normal.png"
+                    source: "../images/system_normal.png"
                     onClicked: {
                         sessionManager.shutdown()
                     }
@@ -207,7 +207,7 @@ Rectangle {
 
                 ImageButton {
                     id: reboot_button
-                    source: "images/system_reboot.png"
+                    source: "../images/system_reboot.png"
                     onClicked: {
                         sessionManager.reboot()
                     }
@@ -245,15 +245,15 @@ if (!dateFormatSet) {
                 verticalCenter: parent.verticalCenter
                 right: parent.right
             }
-            source: "images/login_normal.png"
+            source: "../images/login_normal.png"
 
             MouseArea {
                 id: mouseArea
                 hoverEnabled: true
                 anchors.fill: parent
 
-                onEntered: login_button.source = "images/login_active.png"
-                onExited: login_button.source = "images/login_normal.png"
+                onEntered: login_button.source = "../images/login_active.png"
+                onExited: login_button.source = "../images/login_normal.png"
                 onClicked: {
                     if (mouse.button === Qt.LeftButton)
                         sessionManager.login(user_entry.text, pw_entry.text, session.index)
