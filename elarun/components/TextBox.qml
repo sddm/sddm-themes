@@ -46,18 +46,13 @@ Item {
         color: container.color
         border.color: textInput.focus ? container.focusColor : container.borderColor
         border.width: 1
+
         MouseArea {
             hoverEnabled: true
             anchors.fill: parent
 
-            onEntered: {
-                parent.border.color = container.hoverColor
-                parent.border.width = 3
-            }
-            onExited: {
-                parent.border.color = textInput.focus ? container.focusColor : container.borderColor
-                parent.border.width = 1
-            }
+            onEntered: parent.border.color = container.hoverColor
+            onExited: parent.border.color = textInput.focus ? container.focusColor : container.borderColor
         }
     }
 
@@ -69,5 +64,7 @@ Item {
         color: "black"
 
         passwordCharacter: "\u25cf"
+
+        onActiveFocusChanged: border.border.color = activeFocus ? container.focusColor : container.borderColor
     }
 }

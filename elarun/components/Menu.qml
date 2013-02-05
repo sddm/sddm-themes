@@ -28,11 +28,7 @@ Rectangle {
     width: MenuImpl.getMenuWidth() + 1
     height: MenuImpl.getMenuHeight()
     //radius: 5
-    gradient: Gradient {
-        GradientStop { position: 0.0; color: "#c3c3c3" }
-        GradientStop { position: 0.5; color: "#e5e5e5" }
-        GradientStop { position: 1.0; color: "#c3c3c3" }
-    }
+    color: "#e5e5e5"
 
     states: State {
         name: "visible"
