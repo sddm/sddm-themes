@@ -24,22 +24,26 @@
 
 import QtQuick 2.0
 
-Item {
+FocusScope {
     id: container
 
-    property string name: ""
-    property string icon: ""
-    property bool hover: false
-
-    Behavior on width { NumberAnimation { duration: 100 } }
-    Behavior on height { NumberAnimation { duration: 100 } }
-
-    signal login(string password)
-
-    width: 150
-    height: hover ? 225 : 180
-
+    width: 150; height: 180;
     clip: true
+
+    property alias name: name.text
+    property alias icon: icon.source
+    property alias password: password.text
+
+    signal login()
+
+    states: [
+        State {
+            name: "focus"; when: container.activeFocus
+            PropertyChanges { target: container; height: 225 }
+        }
+    ]
+
+    Behavior on height { NumberAnimation { duration: 100 } }
 
     Rectangle {
         id: shadow
@@ -49,16 +53,17 @@ Item {
 
     Rectangle {
         id: canvas
-        anchors.fill: parent
+        anchors.fill: shadow
         anchors.margins: 2
         color: "white"
     }
 
     MouseArea {
+        id: mouseArea
         anchors.fill: parent
         hoverEnabled: true
-        onEntered: parent.hover = true;
-        onExited: parent.hover = false;
+        onEntered: container.focus = true
+        onExited: container.focus = false
     }
 
     Column {
@@ -69,19 +74,17 @@ Item {
         clip: true
 
         Image {
-            id: image
+            id: icon
             width: parent.width; height: 150
-            source: container.icon
             fillMode: Image.PreserveAspectCrop
         }
 
         Text {
-            id: userName
+            id: name
             height: 20
             anchors.horizontalCenter: parent.horizontalCenter
             color: "#666666"
             clip: true
-            text: container.name
 
             font.bold: true; font.capitalization: Font.AllUppercase
         }
@@ -92,7 +95,7 @@ Item {
             font.pixelSize: 14
 
             echoMode: TextInput.Password
-            focus: container.hover
+            focus: true
 
             Keys.onPressed: {
                 if (event.key === Qt.Key_Return) {

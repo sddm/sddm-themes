@@ -75,6 +75,7 @@ Rectangle {
                     model: userModel
 
                     PictureBox {
+                        width: 150; height: 180
                         anchors.verticalCenter: parent.verticalCenter
                         name: (model.realName === "") ? model.userName : model.realName
                         icon: model.icon
