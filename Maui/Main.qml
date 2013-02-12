@@ -86,6 +86,73 @@ Rectangle {
         }
     }
 
+    Rectangle {
+        id: actionBar
+        anchors.top: parent.top;
+        anchors.horizontalCenter: parent.horizontalCenter
+        width: parent.width; height: 40
+
+
+        Row {
+            anchors.left: parent.left
+            anchors.margins: 5
+            height: parent.height
+            spacing: 5
+
+            Text {
+                height: parent.height
+                anchors.verticalCenter: parent.verticalCenter
+
+                text: qsTr("Sessions:")
+                font.pixelSize: 16
+                verticalAlignment: Text.AlignVCenter
+            }
+
+            SpinBox {
+                id: session
+                anchors.verticalCenter: parent.verticalCenter
+                width: 270
+
+                items: sessionManager.sessionNames;
+                index: sessionManager.lastSessionIndex
+
+                font.pixelSize: 14
+            }
+        }
+
+        Row {
+            anchors.right: parent.right
+            anchors.margins: 5
+            height: parent.height
+            spacing: 5
+
+            Image {
+                height: parent.height
+                anchors.verticalCenter: parent.verticalCenter
+                source: "reboot.png"
+                fillMode: Image.PreserveAspectFit
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: sessionManager.reboot()
+                }
+            }
+
+            Image {
+                height: parent.height
+                anchors.verticalCenter: parent.verticalCenter
+                source: "shutdown.png"
+                fillMode: Image.PreserveAspectFit
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: sessionManager.shutdown()
+                }
+            }
+        }
+
+    }
+
     Component.onCompleted: {
     }
 }
