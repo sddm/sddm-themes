@@ -10,3 +10,5 @@ Website=https://github.com/sddm/sddm
 Screenshot=screenshot.jpg
 MainScript=Main.qml
 Email=abdurrahmanavci@gmail.com
+Theme-Id=maui
+Theme-API=2
