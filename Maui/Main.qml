@@ -108,13 +108,13 @@ Rectangle {
                 verticalAlignment: Text.AlignVCenter
             }
 
-            SpinBox {
+            ComboBox {
                 id: session
                 anchors.verticalCenter: parent.verticalCenter
                 width: 270
 
-                items: sessionManager.sessionNames;
-                index: sessionManager.lastSessionIndex
+                model: sessionModel
+                index: sessionModel.lastIndex
 
                 font.pixelSize: 14
             }

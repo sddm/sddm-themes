@@ -35,19 +35,6 @@ Rectangle {
         }
     }
 
-    Component.onCompleted: {
-        initSessionModel();
-    }
-
-    function initSessionModel(){
-        for (var ii=0; ii<sessionManager.sessionNames.length; ii++)
-            sessionModel.append({"name":sessionManager.sessionNames[ii]});
-    }
-
-    ListModel {
-         id: sessionModel
-    }
-
     Image {
         id: background
         anchors.fill: parent
@@ -262,5 +249,5 @@ if (!dateFormatSet) {
         }
 
     }
-    
+
 }
