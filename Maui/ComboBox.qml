@@ -37,6 +37,8 @@ FocusScope {
     property alias model: listView.model
     property alias index: listView.currentIndex
 
+    onFocusChanged: if (!container.activeFocus) dropDown.state = ""
+
     Rectangle {
         id: main
 
