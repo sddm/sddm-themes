@@ -20,13 +20,13 @@ import "Menu.js" as MenuImpl
 Rectangle {
     id: menu
 
-    property ListModel model
+    property alias model: menuList.model
+    property alias index: menuList.currentIndex
     property int itemFontSize : 9
 
-    signal itemClicked(int index)
 
-    width: MenuImpl.getMenuWidth() + 1
-    height: MenuImpl.getMenuHeight()
+    width: 200; // MenuImpl.getMenuWidth() + 1
+    height: 200; //MenuImpl.getMenuHeight()
     //radius: 5
     color: "#e5e5e5"
 
@@ -46,16 +46,15 @@ Rectangle {
     ListView {
         id: menuList
 
-        highlight: Rectangle { color: "lightsteelblue" }
+        highlight: Rectangle { color: "steelblue" }
         clip: true
-        model: menu.model;
         anchors.fill: parent
 
         delegate: Rectangle {
             id: listViewItem
 
-            color: "transparent"
-            
+            color: mouseArea.containsMouse ? "lightsteelblue" : "transparent"
+
             width: menu.width - 1
             height: itemText.height + 10
 
@@ -74,9 +73,11 @@ Rectangle {
             }
 
             MouseArea {
+                id: mouseArea
                 anchors.fill: parent
+                hoverEnabled: true
                 onClicked: {
-                    itemClicked(index);
+                    menuList.currentIndex = index;
                     MenuImpl.hide();
                 }
             }

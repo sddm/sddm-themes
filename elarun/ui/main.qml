@@ -176,11 +176,9 @@ Rectangle {
                         }
 
                         opacity: 0
-                        onItemClicked: {
-                            //console.log("clicked red item: " + index)
-                            sessionManager.login(user_entry.text, pw_entry.text, index)
-                        }
+
                         model: sessionModel
+                        index: sessionModel.lastIndex
                     }
                 }
 
