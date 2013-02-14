@@ -74,6 +74,7 @@ FocusScope {
         color: "black"
         focus: true
         elide: Text.ElideRight
+        text: listView.currentItem.text
 
         verticalAlignment: Text.AlignVCenter
     }
@@ -116,10 +117,11 @@ FocusScope {
         Component {
             id: myDelegate
 
-
             Rectangle {
                 width: dropDown.width; height: container.height
                 color: (index == ListView.view.currentIndex) ? container.focusColor : (delegateMouseArea.containsMouse ? container.hoverColor : container.color)
+
+                property string text: model.name
 
                 Text {
                     id: textDelegate
@@ -137,12 +139,7 @@ FocusScope {
                     id: delegateMouseArea
                     anchors.fill: parent
                     hoverEnabled: true
-                    onClicked: { listView.currentIndex = index; txtMain.text = model.name; dropDown.state = ""; }
-                }
-
-                Component.onCompleted: {
-                    if (listView.currentIndex == index)
-                        txtMain.text = model.name
+                    onClicked: { listView.currentIndex = index; dropDown.state = ""; }
                 }
             }
         }
