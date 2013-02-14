@@ -1,5 +1,5 @@
 /***************************************************************************
-* Copyright (c) 2013 Abdurrahman AVCI <abdurrahmanavci@gmail.com
+* Copyright (c) 2013 Abdurrahman AVCI <abdurrahmanavci@gmail.com>
 *
 * Permission is hereby granted, free of charge, to any person
 * obtaining a copy of this software and associated documentation
@@ -24,47 +24,67 @@
 
 import QtQuick 1.1
 
-Item {
+FocusScope {
     id: container
     width: 80; height: 30
 
     property color color: "white"
     property color borderColor: "#ababab"
     property color focusColor: "#266294"
-    property color hoverColor: "#990b678c"
-    property alias font: textInput.font
-    property alias textColor: textInput.color
-    property alias echoMode: textInput.echoMode
-    property alias text: textInput.text
-
-    onFocusChanged: textInput.focus = focus
+    property color hoverColor: "#5692c4"
+    property alias font: txtMain.font
+    property alias textColor: txtMain.color
+    property alias echoMode: txtMain.echoMode
+    property alias text: txtMain.text
 
     Rectangle {
-        id: border
+        id: main
+
         anchors.fill: parent
 
         color: container.color
-        border.color: textInput.focus ? container.focusColor : container.borderColor
+        border.color: container.borderColor
         border.width: 1
 
-        MouseArea {
-            hoverEnabled: true
-            anchors.fill: parent
+        states: [
+            State {
+                name: "hover"; when: mouseArea.containsMouse
+                PropertyChanges { target: main; border.width: 1; border.color: container.hoverColor }
+            },
+            State {
+                name: "focus"; when: container.activeFocus && !mouseArea.containsMouse
+                PropertyChanges { target: main; border.width: 1; border.color: container.focusColor }
+            }
+        ]
 
-            onEntered: parent.border.color = container.hoverColor
-            onExited: parent.border.color = textInput.focus ? container.focusColor : container.borderColor
-        }
+        transitions: [
+            Transition {
+                ColorAnimation { target: main; properties: "border.color"; duration: 200 }
+            }
+        ]
+    }
+
+    MouseArea {
+        id: mouseArea
+        anchors.fill: container
+
+        hoverEnabled: true
+
+        onEntered: if (main.state == "") main.state = "hover";
+        onExited: if (main.state == "hover") main.state = "";
+        onClicked: container.focus = true;
     }
 
     TextInput {
-        id: textInput
+        id: txtMain
         width: parent.width - 16
         anchors.centerIn: parent
 
         color: "black"
 
-        passwordCharacter: "\u25cf"
+        clip: true
+        focus: true
 
-        onActiveFocusChanged: border.border.color = activeFocus ? container.focusColor : container.borderColor
+        passwordCharacter: "\u25cf"
     }
 }
