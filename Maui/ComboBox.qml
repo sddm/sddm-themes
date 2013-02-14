@@ -124,9 +124,7 @@ FocusScope {
             } else {
                 nextItem();
             }
-        } else if (event.key === Qt.Key_Return) {
-            dropDown.state = "";
-        } else if (event.key === Qt.Key_Escape) {
+        } else if (event.key === Qt.Key_Return || event.key === Qt.Key_Escape) {
             dropDown.state = "";
         }
     }
@@ -144,7 +142,7 @@ FocusScope {
 
             Rectangle {
                 width: dropDown.width; height: container.height
-                color: (index == ListView.view.currentIndex) ? container.focusColor : (delegateMouseArea.containsMouse ? container.hoverColor : container.color)
+                color: "transparent"
 
                 property string text: model.name
 
@@ -164,7 +162,8 @@ FocusScope {
                     id: delegateMouseArea
                     anchors.fill: parent
                     hoverEnabled: true
-                    onClicked: { listView.currentIndex = index; dropDown.state = ""; }
+                    onEntered: listView.currentIndex = index
+                    onClicked: dropDown.state = ""
                 }
             }
         }
@@ -173,6 +172,7 @@ FocusScope {
             id: listView
             width: container.width; height: container.height * count
             delegate: myDelegate
+            highlight: Rectangle { anchors.horizontalCenter: parent.horizontalCenter; color: container.hoverColor }
         }
 
         Rectangle {
