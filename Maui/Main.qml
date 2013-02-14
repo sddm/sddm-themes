@@ -79,7 +79,7 @@ Rectangle {
                         anchors.verticalCenter: parent.verticalCenter
                         name: (model.realName === "") ? model.userName : model.realName
                         icon: model.icon
-                        onLogin: sessionManager.login(model.userName, password, sessionManager.lastSessionIndex)
+                        onLogin: sessionManager.login(model.userName, password, session.index)
                     }
                 }
             }
