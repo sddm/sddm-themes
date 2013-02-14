@@ -112,6 +112,10 @@ FocusScope {
         }
     }
 
+    Keys.onDownPressed: nextItem(); Keys.onUpPressed: prevItem()
+    Keys.onReturnPressed: if (dropDown.state == "visible") dropDown.state = "";
+    Keys.onEscapePressed: if (dropDown.state == "visible") dropDown.state = "";
+
     Rectangle {
         id: dropDown
         width: container.width; height: 0
