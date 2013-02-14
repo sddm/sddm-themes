@@ -104,6 +104,12 @@ FocusScope {
         onEntered: if (main.state == "") main.state = "hover";
         onExited: if (main.state == "hover") main.state = "";
         onClicked: { container.focus = true; if (dropDown.state == "") dropDown.state = "visible"; else dropDown.state = ""; }
+        onWheel: {
+            if (wheel.angleDelta.y > 0)
+                prevItem();
+            else
+                nextItem();
+        }
     }
 
     Rectangle {
@@ -168,5 +174,13 @@ FocusScope {
         transitions: Transition {
             NumberAnimation { target: dropDown; properties: "height"; duration: 200 }
         }
+    }
+
+    function prevItem() {
+        listView.currentIndex = Math.max(0, listView.currentIndex - 1)
+    }
+
+    function nextItem() {
+        listView.currentIndex = Math.min(listView.count - 1, listView.currentIndex + 1)
     }
 }
