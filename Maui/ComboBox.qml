@@ -112,9 +112,24 @@ FocusScope {
         }
     }
 
-    Keys.onDownPressed: nextItem(); Keys.onUpPressed: prevItem()
-    Keys.onReturnPressed: if (dropDown.state == "visible") dropDown.state = "";
-    Keys.onEscapePressed: if (dropDown.state == "visible") dropDown.state = "";
+    Keys.onPressed: {
+        if (event.key === Qt.Key_Up) {
+            prevItem();
+        } else if (event.key === Qt.Key_Down) {
+            if (event.modifiers === Qt.AltModifier) {
+                if (dropDown.state == "")
+                    dropDown.state = "visible";
+                else
+                    dropDown.state = "";
+            } else {
+                nextItem();
+            }
+        } else if (event.key === Qt.Key_Return) {
+            dropDown.state = "";
+        } else if (event.key === Qt.Key_Escape) {
+            dropDown.state = "";
+        }
+    }
 
     Rectangle {
         id: dropDown
